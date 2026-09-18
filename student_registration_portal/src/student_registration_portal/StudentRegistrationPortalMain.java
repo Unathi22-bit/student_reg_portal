@@ -15,129 +15,77 @@ import java.util.regex.Pattern;
  */
 public class StudentRegistrationPortalMain {
 
-    public static Scanner input = new Scanner(System.in);
-        
-    public static void main(String[] args) {
-        
-        String firstname;
-        String lastname;
-        String username;
-        String password;
-        String cellphoneNumber;
     
-        System.out.println("===== Welcome to the Student Registration Portal =======\n");
-        
-        // Ask and capture for student details 
-        System.out.print("Enter your firstname: ");
-        firstname = input.nextLine();
-        
-        System.out.print("Enter your surname: ");
-        lastname = input.nextLine();
-        
-        System.out.println("Thank you : " +firstname+" "+lastname+".\n");
-        
-       // Ask student username and validate it in checkStudentUsername() method.
-       while (true) {
-           System.out.print("Please enter your preferred username: ");
-           username = input.nextLine();
-           
-           if (checkStudentUsername(username)) {
-               System.out.println("Username successfully captured!\n");
-               break;
-           } else {
-               System.out.println("Invaild username. It must contain an unerscore (_) and be on more than 5 characters");
-               System.out.println("");
-           }
-       }
-       
-       // ask Student to capture cellphone number and validate it : checkCellPhoneNumber().
-        while (true){
-          System.out.print("Enter your cell phone number. (EG: +2781234567) : ");
-          cellphoneNumber = input.nextLine();
-          
-          if (checkcellPhoneNumber(cellphoneNumber)){
-              System.out.println("Cell phone number successfully captured.\n");
-              break;
-          } else {
-              System.out.println("Cell phone number is incorrectly captured.");
-              System.out.println("Please enter a valid South African number with international code(+27).\n");
-          }
-        }
-        
-        // capture and validate student password
-        while (true){
-          System.out.print("Enter your prefferred password: ");
-          password = input.nextLine();
-          
-          if (checkPasswordComplexity(password)){
-              System.out.println("Password successfully captured.\n");
-              break;
-          } else {
-              System.out.println("Captured password length must be 8 characters long and  contain a Capital Letter, A Number and a Special Character.");
-          }
-        }
-                
-       
-        System.out.println("\nRegistration successful! Would you like to : \n");
-        
-        // allow user to either login or exit application after successful registration.
-        System.out.println("1. Login");
-        System.out.println("2. Exit");
-        System.out.println("Choose an option:  ");
-        
-           String studentChoice = input.nextLine().trim();
+    public static Scanner scanner = new Scanner(System.in);
+    public static Login registerUser = null;
+    
+     public static void main(String[] args){
+         boolean running = true;
+         
+         while (running){
+             System.out.println("===== Welcome to the Student Portal =======\n");
+            System.out.println("1. Regiter a new student");
+            System.out.println("2. Login");
+            System.out.println("3. Exit");
+            System.out.println("Choose an option:  ");
             
-             switch (studentChoice) {
-                 case "1" -> studentLogin();
-                 case "2" -> {
-                                System.out.println("Goodbye!");
-                             }
+            String choice = scanner.nextLine().trim();
+            
+             switch (choice) {
+                 case "1" -> registerNewUser();
+                 case "2" -> loginUser();
+                 case "3" -> {
+                     running = false;
+                     System.out.println("Goodbye!");
+                 }
                  default -> System.out.println("Invaild option, please try again.");
+                     
              }
-        
-        
-
-        input.close();
-    }
-    
-    public static boolean checkStudentUsername(String prefferredUsername) {
-      return prefferredUsername.contains("_") && prefferredUsername.length() >= 4;
-    }
-    
-    public static boolean checkcellPhoneNumber(String cellPhoneNumber) {
-
-    String regex ="\\+27[0-9]{9}$";
-
-    return cellPhoneNumber != null && Pattern.matches(regex, cellPhoneNumber);
-    }
-    
-    public static boolean checkPasswordComplexity(String password){
-        if (password == null || password.length() < 8){
-            return false;
-        }
-        
-        boolean hasCapital = password.matches(".*[A-Z].*");
-        boolean hasNumber = password.matches(".*[0-9].*");
-        boolean hasSpecial = password.matches(".*[^a-zA-Z0-9].*");
-        
-        return hasCapital && hasNumber && hasSpecial;
-    }
-    
-          
+         }
+         
+         scanner.close();
+     }
+     
+     //Captures user details from the console and registers them using the Login class.
+     public static void registerNewUser(){
+         System.out.print("Enter first name : ");
+         String firstName = scanner.nextLine();
+         
+         System.out.print("Enter last name : ");
+         String lastName = scanner.nextLine();
+         
+         System.out.print("Enter prefferred  username(must contain an underscore, max 5 characters) : ");
+         String username = scanner.nextLine();
+         
+         System.out.print("Enter password(min 8 chars, a captial letter, a number, a special character) : ");
+         String password = scanner.nextLine();
+         
+         System.out.print("Enter South African cell phone number(format +27XXXXXXX): ");
+         String cellPhoneNumber = scanner.nextLine();
+         
+         Login newUser = new Login(firstName, lastName, username,password, cellPhoneNumber);
+         String result = newUser.registerUser();
+         System.out.println(result);
+         
+         //Only keep the user "on file" if registration fully succeeded
+         if (newUser.checkUserName()
+                 && newUser.checkPasswordComplexity()&& newUser.checkCellPhoneNumber()) {
+             registerUser = newUser;
+         }
+     }
+      
     // Captures login credentials from the console and validates them against the last successfully registered user.
-     public static void studentLogin(){
-//         if (registerUser == null){
-//             System.out.println("No registered user found. Please register first");
-//             return;
-//        }
+     public static void loginUser(){
+         if (registerUser == null){
+             System.out.println("No registered user found. Please register first");
+             return;
+        }
          System.out.print("Enter username: ");
-         String username = input.nextLine();
+         String username = scanner.nextLine();
          
          System.out.print("Enter password: ");
-         String password = input.nextLine();
+         String password = scanner.nextLine();
          
-         //call login service
+         System.out.println(registerUser.returnLoginStatus(username, password));
      }
-         
-    
 }
