@@ -16,7 +16,6 @@ public class StudentRegistrationPortalMain {
 
     public static Scanner input = new Scanner(System.in);
         
-   
     public static void main(String[] args) {
         
         String firstname;
@@ -36,7 +35,7 @@ public class StudentRegistrationPortalMain {
         
         System.out.println("Thank you : " +firstname+" "+lastname+".\n");
         
-       // Ask student username and validate it.
+       // Ask student username and validate it in checkStudentUsername() method.
        while (true) {
            System.out.print("Please enter your preferred username: ");
            username = input.nextLine();
