@@ -78,9 +78,25 @@ public class StudentRegistrationPortalMain {
         }
                 
        
-        System.out.println("\nRegistration successful!");
-        System.out.println("Welcome " + firstname + " " + lastname);
-         
+        System.out.println("\nRegistration successful! Would you like to : \n");
+        
+        // allow user to either login or exit application after successful registration.
+        System.out.println("1. Login");
+        System.out.println("2. Exit");
+        System.out.println("Choose an option:  ");
+        
+           String studentChoice = input.nextLine().trim();
+            
+             switch (studentChoice) {
+                 case "1" -> studentLogin();
+                 case "2" -> {
+                                System.out.println("Goodbye!");
+                             }
+                 default -> System.out.println("Invaild option, please try again.");
+             }
+        
+        
+
         input.close();
     }
     
@@ -106,5 +122,22 @@ public class StudentRegistrationPortalMain {
         
         return hasCapital && hasNumber && hasSpecial;
     }
+    
+          
+    // Captures login credentials from the console and validates them against the last successfully registered user.
+     public static void studentLogin(){
+//         if (registerUser == null){
+//             System.out.println("No registered user found. Please register first");
+//             return;
+//        }
+         System.out.print("Enter username: ");
+         String username = input.nextLine();
+         
+         System.out.print("Enter password: ");
+         String password = input.nextLine();
+         
+         //call login service
+     }
+         
     
 }
