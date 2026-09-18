@@ -14,17 +14,20 @@ import java.util.Scanner;
  */
 public class StudentRegistrationPortalMain {
 
-    public static Scanner scanner = new Scanner(System.in);
+    public static Scanner input = new Scanner(System.in);
+    
+    public String firstname;
+    public String lastname;
+    public String username;
+    public String password;
+    public String cellPhoneNumber;
+    
     
     public static void main(String[] args) {
     
-        System.out.println("=====Welcome to the Student Registration Portal=======");
-        System.out.println("=====What would you like to do ? Please select option.=======");
-        System.out.println("1. Regiter a new user");
-        System.out.println("2. Login");
-        System.out.println("3. Exit");
-            
-        scanner.close();
+        System.out.println("===== Welcome to the Student Registration Portal =======");
+        
+        input.close();
     }
     
 }
