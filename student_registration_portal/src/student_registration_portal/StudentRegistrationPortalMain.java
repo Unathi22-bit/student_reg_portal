@@ -18,11 +18,11 @@ public class StudentRegistrationPortalMain {
     
     public static void main(String[] args) {
     
-        System.out.println("=====Registration & Login App=======");
+        System.out.println("=====Welcome to the Student Registration Portal=======");
+        System.out.println("=====What would you like to do ? Please select option.=======");
         System.out.println("1. Regiter a new user");
         System.out.println("2. Login");
         System.out.println("3. Exit");
-        System.out.println("Choose an option:  ");
             
         scanner.close();
     }
