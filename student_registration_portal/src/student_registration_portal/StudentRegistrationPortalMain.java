@@ -64,9 +64,22 @@ public class StudentRegistrationPortalMain {
           }
         }
         
+        // capture and validate student password
+        while (true){
+          System.out.print("Enter your prefferred password: ");
+          password = input.nextLine();
+          
+          if (checkPasswordComplexity(password)){
+              System.out.println("Password successfully captured.\n");
+              break;
+          } else {
+              System.out.println("Captured password length must be 8 characters long and  contain a Capital Letter, A Number and a Special Character.");
+          }
+        }
+                
        
-        System.out.println("\n Registration successful!");
-        System.out.println("Welcome" + firstname + "" + lastname);
+        System.out.println("\nRegistration successful!");
+        System.out.println("Welcome " + firstname + " " + lastname);
          
         input.close();
     }
@@ -80,6 +93,18 @@ public class StudentRegistrationPortalMain {
     String regex ="\\+27[0-9]{9}$";
 
     return cellPhoneNumber != null && Pattern.matches(regex, cellPhoneNumber);
+    }
+    
+    public static boolean checkPasswordComplexity(String password){
+        if (password == null || password.length() < 8){
+            return false;
+        }
+        
+        boolean hasCapital = password.matches(".*[A-Z].*");
+        boolean hasNumber = password.matches(".*[0-9].*");
+        boolean hasSpecial = password.matches(".*[^a-zA-Z0-9].*");
+        
+        return hasCapital && hasNumber && hasSpecial;
     }
     
 }
