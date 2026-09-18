@@ -5,6 +5,7 @@
 package student_registration_portal;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  * @author 
@@ -22,7 +23,7 @@ public class StudentRegistrationPortalMain {
         String lastname;
         String username;
         String password;
-        String cellPhoneNumber;
+        String cellphoneNumber;
     
         System.out.println("===== Welcome to the Student Registration Portal =======\n");
         
@@ -41,7 +42,7 @@ public class StudentRegistrationPortalMain {
            username = input.nextLine();
            
            if (checkStudentUsername(username)) {
-               System.out.println("Username successfully captured!");
+               System.out.println("Username successfully captured!\n");
                break;
            } else {
                System.out.println("Invaild username. It must contain an unerscore (_) and be on more than 5 characters");
@@ -49,13 +50,36 @@ public class StudentRegistrationPortalMain {
            }
        }
        
-       
+       // ask Student to capture cellphone number and validate it : checkCellPhoneNumber().
+        while (true){
+          System.out.print("Enter your cell phone number. (EG: +2781234567) : ");
+          cellphoneNumber = input.nextLine();
+          
+          if (checkcellPhoneNumber(cellphoneNumber)){
+              System.out.println("Cell phone number successfully captured.\n");
+              break;
+          } else {
+              System.out.println("Cell phone number is incorrectly captured.");
+              System.out.println("Please enter a valid South African number with international code(+27).\n");
+          }
+        }
         
+       
+        System.out.println("\n Registration successful!");
+        System.out.println("Welcome" + firstname + "" + lastname);
+         
         input.close();
     }
     
     public static boolean checkStudentUsername(String prefferredUsername) {
       return prefferredUsername.contains("_") && prefferredUsername.length() >= 4;
+    }
+    
+    public static boolean checkcellPhoneNumber(String cellPhoneNumber) {
+
+    String regex ="\\+27[0-9]{9}$";
+
+    return cellPhoneNumber != null && Pattern.matches(regex, cellPhoneNumber);
     }
     
 }
