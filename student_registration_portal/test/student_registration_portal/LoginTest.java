@@ -10,6 +10,7 @@ package student_registration_portal;
  */
 
 import org.junit.Test;
+import student_registration_portal.Login;
 import static org.junit.Assert.*;
 
 public class LoginTest {
