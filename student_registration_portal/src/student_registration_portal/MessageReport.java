@@ -22,4 +22,14 @@ public class MessageReport {
         return longest.isEmpty()? "No messages found." : longest;
     }
     
+    public static String searchByID(List<Message> messages,String id){
+        
+        for (Message item : messages){
+            if (item.getMessageID().equals(id)){
+                return "Recipient:" + item.getRecipient() + "\nMessage: " + item.getMessage();
+            }
+        }
+        return "Message not found";
+    }
+    
 }
