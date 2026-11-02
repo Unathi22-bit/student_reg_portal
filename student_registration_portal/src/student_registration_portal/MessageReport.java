@@ -22,7 +22,7 @@ public class MessageReport {
         return longest.isEmpty()? "No messages found." : longest;
     }
     
-    public static String searchByID(List<Message> messages,String id){
+    public static String searchByID(List<Message> messages, String id){
         
         for (Message item : messages){
             if (item.getMessageID().equals(id)){
@@ -30,6 +30,20 @@ public class MessageReport {
             }
         }
         return "Message not found";
+    }
+    
+    public static String searchByRecipient(List<Message> messages, String recipient){
+        StringBuilder result = new StringBuilder();
+        for (Message item : messages){
+            if (item.getRecipient().equals(recipient)){
+                result.append(item.getMessage()).append("\n");
+            }
+        }
+        if(result.length() == 0) {
+            return "No messages found.";
+        }else {
+            return result.toString();
+        }
     }
     
 }
