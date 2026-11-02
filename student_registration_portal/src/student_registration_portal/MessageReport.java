@@ -46,4 +46,18 @@ public class MessageReport {
         }
     }
     
+    public static String displayReport(List<Message> message){
+        StringBuilder report = new StringBuilder();
+        for (Message item : message){
+            report.append("Message Hash:").append(item.getMessageHash()).append("\n")
+                    .append("Recipient: ").append(item.getRecipient()).append("\n")
+                    .append("Message: ").append(item.getMessage()).append("\n\n");
+        }
+         if(report.length() == 0) {
+            return "No messages found.";
+        }else {
+            return report.toString();
+        }
+    }
+        
 }
