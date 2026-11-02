@@ -147,23 +147,27 @@ public class Message {
     public static List<String> getMessagesIDs() { return new ArrayList<>(messageIDs);}
     
    
-    public static List<Message> readStoredMessage() throws IOException{
+    public static List<Message> readStoredMessages(){
         List<Message> stored = new ArrayList<>();
         Path file = Path.of("message.json");
         if(!Files.exists(file))return stored;
-        for (String line: Files.readAllLines(file, StandardCharsets.UTF_8)){
-            String id = jsonValue(line,"messageID");
-            String hash = jsonValue(line, "messageHash");
-            String recipient = jsonValue(line, "recipient");
-            String text = jsonValue(line,"message");
-            if (id !=null && hash != null && recipient !=null && text !=null){
-                Message item = new Message(recipient, text);
-                messageIDs.remove(item.messageID);
-                messageHashes.remove(item.messageHash);
-                item.messageID = id;
-                item.messageHash= hash;
-                stored.add(item);
+        try {   
+            for (String line: Files.readAllLines(file, StandardCharsets.UTF_8)){
+                String id = jsonValue(line,"messageID");
+                String hash = jsonValue(line, "messageHash");
+                String recipient = jsonValue(line, "recipient");
+                String text = jsonValue(line,"message");
+                if (id !=null && hash != null && recipient !=null && text !=null){
+                    Message item = new Message(recipient, text);
+                    messageIDs.remove(item.messageID);
+                    messageHashes.remove(item.messageHash);
+                    item.messageID = id;
+                    item.messageHash= hash;
+                    stored.add(item);
+                }
             }
+        } catch (IOException e){
+          System.out.println("Unable to read message:" + e.getMessage());  
         }
         return stored;
     }
