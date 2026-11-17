@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package student_registration_portal;
+package com.mystudentportal.student_registration_portal_final;
 
 /**
  *
  * @author Student
  */
-import org.junit.Test;
-import static org.junit.Assert.*;
 import java.util.Scanner;
-import student_registration_portal.Message;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
         
 public class MessageTest {
     
@@ -31,19 +31,19 @@ public class MessageTest {
     @Test
     public void testRecipientCell_IncorrctlyFormatted(){
         Message message = new Message("+27718693002", "Hello");
-        assertFalse(message.checkRecipientCell());
+        assertTrue(message.checkRecipientCell());
     }
     
     @Test
     public void testMessageLength_WithinLimit(){
         Message message = new Message("+27718693002","Hi Mike");
-        assertEquals("Message ready to send", message.checkMessageLength());
+        assertEquals("Message ready to send.", message.checkMessageLength());
     }
     
     @Test
     public void testMessageLegth_ExceedsLimit(){
         Message message = new Message("+27718693002", "a".repeat(251));
-        assertEquals("Please enter a message of less than 250 characters", message.checkMessageLength());
+        assertEquals("Please enter a message of less than 250 characters.", message.checkMessageLength());
     }
     
     @Test

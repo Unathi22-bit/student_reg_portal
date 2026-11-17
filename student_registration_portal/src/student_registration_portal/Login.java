@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package student_registration_portal;
+package com.mystudentportal.student_registration_portal_final;
 
 /**
  *
@@ -90,7 +90,7 @@ public class Login {
              result.append("Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.\n");
          }
          if (!password0k){
-             result.append("Password is nor correctly formatted; please ensure that contains at least eight characters, a capital letter and special character.\n");
+             result.append("Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.\n");
          }
          if (!cell0k){
              result.append("Cell phone number incorrectly formatted or does not contin international code.\n");
@@ -108,9 +108,9 @@ public class Login {
      
      public String returnLoginStatus(String enteredUsername, String enteredPassword){
         if (loginUser(enteredUsername,enteredPassword)){
-            return "Welcome  " + getFirstName() +" "+ getLastName() + " , it is great to see you again.";
+            return "Welcome " + getFirstName() +" "+ getLastName() + " it is great to see you again.";
         } else {
-            return"Username or password incorrect, please try again";
+            return"Username or password incorrect, please try again.";
         }
      }
      //------------------------Login------------------------------------

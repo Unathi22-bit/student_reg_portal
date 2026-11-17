@@ -2,16 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package student_registration_portal;
+package com.mystudentportal.student_registration_portal_final;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
 /**
  *
  * @author Student
  */
 
-import org.junit.Test;
-import student_registration_portal.Login;
-import static org.junit.Assert.*;
 
 public class LoginTest {
     
@@ -26,13 +28,13 @@ public class LoginTest {
         assertTrue(user.registerUser().contains("Password successfully captured."));
     }
 
-    @Test
+       @Test
     public void testPassword_DoesNotMeetComplexityRequirements() {
         // Test Data: "password"
         // The system returns: "Password is not correctly formatted; please ensure that the
         // password contains at least eight characters, a capital letter, a number, and a
         // special character."
-        Login user = new Login("Jane", "Smith", "toolongname", "password", "08966553");
+        Login user = new Login("Jane", "Smith", "nath_", "password", "08966553");
         assertFalse(user.checkPasswordComplexity());
         assertTrue(user.registerUser().contains(
                 "Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character."));
@@ -89,12 +91,11 @@ public class LoginTest {
         assertFalse(user.loginUser("kyl_1", "wrongpassword"));
     }
 
-
     @Test
     public void testReturnLoginStatus_Welcome() {
         Login user = new Login("John", "Doe", "kyl_1", "Ch&&sec@ke99!", "+27838968976");
         String status = user.returnLoginStatus("kyl_1", "Ch&&sec@ke99!");
-        assertEquals("Welcome John, Doe it is great to see you again.", status);
+        assertEquals("Welcome John Doeit is great to see you again.", status);
     }
 
     @Test
